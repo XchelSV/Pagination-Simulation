@@ -1,0 +1,115 @@
+<html ng-app='Pagination'>
+	<head>
+		<title>Pagination Simulation</title>
+		<!--Import Google Icon Font-->
+	    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	    <!--Import materialize.css-->
+	    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+		<!--Let browser know website is optimized for mobile-->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	    <script type="text/javascript" src="angular.min.js"></script>
+	    <script type="text/javascript" src="app.js"></script>
+
+	</head>
+
+	<body ng-controller='indexController'>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    	<script type="text/javascript" src="modal.js"></script>
+    	<script src="angular-uuid.js"></script>
+    	<div class='container'>
+
+    		<div class='row'>
+    			<div class='col s8 offset-s2'>
+    				<h3>Virtual Memory with Pagination</h3>
+    			</div>
+    		</div>
+
+    		<div class='row' style='margin-top:-20%'>
+    			<div class='col s4 offset-s8'>
+    				<h6><i>Xchel E. Sanchez Vasquez</i></h6>
+    			</div>
+    		</div>
+
+    		<div class='row'>
+    			<div class='col s8 offset-s2'>
+		    		<ul class="collapsible popout" data-collapsible="accordion">
+					    <li ng-repeat='page in pages'>
+					      <div class="collapsible-header"><i class="material-icons">code</i>{{page.name}}</div>
+					      <div class="collapsible-body">
+
+					      		
+						      		<div class="collection" ng-repeat='childPage in page.childPages'>
+								        <a class="collection-item black-text modal-trigger" ng-click='modalAction(childPage)'>{{childPage.name}}</a>
+								    </div>
+								    <div class='row' style='margin-top:5%'>
+									    <div class='col s3 push-s8'>
+										     <button class="btn waves-effect waves-light color red lighten-2"  type="submit" name="action" ng-click='pushChildPages(page.name)'>Agregar
+											    <i class="material-icons right">send</i>
+											 </button>
+										 </div>
+									 </div>
+							    
+
+					      </div>
+					    </li>
+					    
+					  </ul>
+					</div>
+				</div>
+
+				<div class='row'>
+					<div class="input-field col s4">
+				          <input id="search_id" type="text" class="validate" ng-model='input_search' ng-change='searchProcess()'>
+				          <label for="search_id">Buscar Proceso</label>
+				    </div>
+
+				    <div class="input-field col s5">
+				          <p>{{search_p}}</p>
+				    </div>
+
+					<div class='col s1 offset-s1' style='margin-top:3%'>
+
+						  <button class="btn waves-effect waves-light color red lighten-2" type="submit" name="action" ng-click='pushPrincipalPage()'>Agregar
+						    <i class="material-icons right">send</i>
+						  </button>
+
+
+					</div>
+				</div>
+
+
+   <!-- Modal Trigger 
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>-->
+
+			  <!-- Modal Structure -->
+			  <div id="modal1" class="modal bottom-sheet">
+			    <div class="modal-content">
+			      <h4>{{childSelected.name}}{{childSelected.dadName}}</h4>
+			      <p>Bloque de datos</p>
+			      
+					  <div class="chip" ng-repeat='reference in childSelected.references'>
+					    {{reference}}
+					  </div>
+
+			    </div>
+			    <div class="modal-footer">
+			    	<div class='row'>
+					  <div class="input-field col s4 offset-s6">
+				          <input id="reference_id" type="text" class="validate" ng-model='input_value'>
+				          <label for="reference_id">Etiqueta del Dato</label>
+				      </div>
+				      <div class='col s2' style='margin-top:1%'>
+				          <button class="btn waves-effect waves-light color red lighten-2" type="submit" name="action" ng-click='addReference()'>Agregar <i class="material-icons right">send</i>
+						  </button>	
+				      </div>
+				    </div>
+			    </div>
+			  </div>
+
+    	</div>
+
+	</body>
+</html>
